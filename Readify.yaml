@@ -1,0 +1,705 @@
+openapi: 3.0.1
+info:
+  title: Readify API
+  description: API for manage a library.
+  version: 1.0.0
+servers:
+  - url: 'https://api.readify.com'
+
+tags:
+  - name: books
+    description: Operations to be carried out on books
+  - name: loans
+    description: Operations to be carried out with loans.
+  - name: users
+    description: Operations to manage users.
+
+paths:
+  /books:
+    get:
+      tags:
+        - books
+      summary: List the books.
+      description: |
+        This operation allows you to consult library books.
+        - Write the title of the book
+        - Write the author of the book
+      parameters:
+        - $ref: '#/components/parameters/title'
+        - $ref: '#/components/parameters/author'
+      responses:
+        '200':
+          description: Returns the full list of library books.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookOutDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    post:
+      tags:
+        - books
+      summary: Add new book.
+      description: |
+        This operation allows you to add a book to the library.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookInDTO'
+      responses:
+        '201':
+          description: The book has been registered correctly
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookOutDTO'
+        '400':
+          description: Bad Request (Validation error on input data)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+  /book/{bookId}:
+    parameters:
+      - $ref: '#/components/parameters/bookId'
+    get:
+      tags:
+        - books
+      summary: Get data from a book
+      description: |
+        This operation allows you to obtain the data of a book
+      responses:
+        '200':
+          description: The book has been found correctly.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookOutDTO'
+        '404':
+          description: The book couldn't be found.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    put:
+      tags:
+        - books
+      summary: Modify book.
+      description: |
+        This operation allows you to modify a book in the library.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookInDTO'
+      responses:
+        '200':
+          description: The book has been successfully modified.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookOutDTO'
+        '404':
+          description: The book couldn't be found.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    delete:
+      tags:
+        - books
+      summary: Delete book.
+      description: |
+        This operation allows you to delete a book from the library.
+      responses:
+        '200':
+          description: Book has been successfully deleted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookOutDTO'
+        '404':
+          description: The book couldn't be found.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+  /users:
+    get:
+      tags:
+        - users
+      summary: List users.
+      description: |
+        This operation allows users to be consulted.
+        - Enter the user's name.
+      parameters:
+        - $ref: '#/components/parameters/userName'
+      responses:
+        '200':
+          description:  Returns the full list of users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserOutDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    post:
+      tags:
+        - users
+      summary: Add a new user.
+      description: |
+        This operation allows you to add a user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInDTO'
+      responses:
+        '201':
+          description: The user has been successfully registered.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserOutDTO'
+        '400':
+          description: Bad Request (Validation error on input data)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+  /user/{userId}:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      tags:
+        - users
+      summary: Gets a user's data.
+      description: |
+        This operation allows you to consult a user's data
+      responses:
+        '200':
+          description: The user has been found correctly.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserOutDTO'
+        '404':
+          description: The user couldn't be found.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    put:
+      tags:
+        - users
+      summary: Modify user.
+      description: |
+        This operation allows you to modify a user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInDTO'
+      responses:
+        '200':
+          description: The user has been successfully modified.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserOutDTO'
+        '404':
+          description: The user couldn't be found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    delete:
+      tags:
+        - users
+      summary: Delete a user.
+      description: |
+        This operation allows you to delete a user.
+      responses:
+        '200':
+          description: The user has been successfully deleted
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserOutDTO'
+        '404':
+          description: The user couldn't be found.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+  /user/{userId}/loans:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+    get:
+      tags:
+        - loans
+      summary: Obtains loans from a user.
+      description: |
+        This operation allows you to consult the loans that a user has made.
+      responses:
+        '200':
+          description:  The loan has been found correctly.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoanOutDTO'
+        '404':
+          description:  The loan couldn't be found.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    post:
+      tags:
+        - loans
+      summary: Add new loan
+      description: |
+        This operation allows you to add a loan.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanInDTO'
+      responses:
+        '201':
+          description: The loan has been registered correctly.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoanOutDTO'
+        '400':
+          description: Bad Request (Validation error on input data)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+  /loan/{loanId}:
+    parameters:
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/loanId'
+    get:
+      tags:
+        - loans
+      summary: Obtain loan details.
+      description: |
+        This operation allows you to consult the details of a loan.
+      responses:
+        '200':
+          description: The loan has been found correctly.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoanOutDTO'
+        '404':
+          description: The loan couldn't be found.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    put:
+      tags:
+        - loans
+      summary: Modify loan.
+      description: |
+        This operation allows you to modify a loan.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanInDTO'
+      responses:
+        '200':
+          description: The loan has been successfully modified.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoanOutDTO'
+        '404':
+          description: The loan couldn't be found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    delete:
+      tags:
+        - loans
+      summary: Delete loan.
+      description: |
+        This operation allows you to delete a loan.
+      responses:
+        '200':
+          description: The loan has been successfully deleted.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoanOutDTO'
+        '404':
+          description: The loan couldn't be found.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+
+
+
+components:
+  schemas:
+    BookInDTO:
+      type: object
+      properties:
+        title:
+          type: string
+          example: The Odyssey
+          description: Título del libro.
+        author:
+          type: string
+          example: Homer
+          description: Book's author.
+        publishedDate:
+          type: number
+          format: float
+          example: 2024-05-17
+          description: Publication date
+        ISBN:
+          type: string
+          example: 0-7645-2641-3
+          description: ISBN.
+        available:
+          type: boolean
+          example: true
+          description: Whether the book is available or not.
+        pageCount:
+          type: number
+          format: int32
+          example: 3
+          description: Number of pages in the book.
+    BookOutDTO:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 3
+          description: Book's identifier.
+    UserInDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Rocío
+          description: User name.
+        email:
+          type: string
+          example: bibliofilo@gmail.com
+          description: User's e-mail.
+        active:
+          type: boolean
+          example: true
+          description: Whether the book is available or not.
+        role:
+          type: number
+          format: int32
+          example: 2
+          description: User role.
+    UserOutDTO:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 3
+          description: User's identifier
+        membershipDate:
+          type: string
+          format: date
+          example: 2018-08-01
+          description: User membership date.
+    LoanInDTO:
+      type: object
+      properties:
+        returnDate:
+          type: string
+          format: date
+          example: 2024-05-02
+          description: Return date.
+        returned:
+          type: boolean
+          example: true
+          description: Whether the book has been returned or not.
+    LoanOutDTO:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 5
+          description: Loan's identifier.
+        loanDate:
+          type: string
+          format: date
+          example: 2024-05-15
+          description: Loan date.
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: number
+          format: int32
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: string
+    BadRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 400
+        message: Validation Error
+    ResourceNotFound:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 404
+        message: Product Not Found
+    InternalServerError:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 500
+        message: Internal Server Error
+
+  parameters:
+    bookId:
+      name: bookId
+      in: path
+      description: Book's ID.
+      example: 23
+      required: true
+      schema:
+        type: number
+        format: int64
+    userId:
+      name: userId
+      in: path
+      description: User's ID.
+      example: 34
+      required: true
+      schema:
+        type: number
+        format: int64
+    loanId:
+      name: loanId
+      in: path
+      description: Loan's ID.
+      example: 12
+      required: true
+      schema:
+        type: number
+        format: int64
+    title:
+      name: Title
+      in: query
+      description: Write the book's title.
+      example: The Odyssey
+      required: false
+      schema:
+        type: string
+    author:
+      name: Author
+      in: query
+      description: Write the book's author.
+      example: Homer
+      required: false
+      schema:
+        type: string
+    userName:
+      name: Name
+      in: query
+      description: Write the user's name
+      example: Marcos
+      required: false
+      schema:
+        type: string
