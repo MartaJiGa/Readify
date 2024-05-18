@@ -53,10 +53,17 @@ public class BookController {
 
     //region POST
     @PostMapping("/books")
-    public void saveBook(@RequestBody Book book) {
+    public ResponseEntity<Void> saveBook(@RequestBody Book book) {
         logger.info("ini POST /books");
-        bookService.saveBook(book);
+        Boolean isCreated = bookService.saveBook(book);
         logger.info("end POST /books");
+
+        if(isCreated){
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
     //endregion
 

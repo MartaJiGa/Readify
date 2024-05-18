@@ -34,7 +34,7 @@ public class UserService {
     //endregion
 
     //region POST
-    public void saveUser(User user){
+    public boolean saveUser(User user){
         logger.info("POST /users -> service saveUser(User user) -> " +
                 "\n\tId: " + user.getId() +
                 "\n\tName: " + user.getName() +
@@ -42,8 +42,14 @@ public class UserService {
                 "\n\tMembership date: " + user.getMembershipDate() +
                 "\n\tActive: " + user.getActive() +
                 "\n\tRole: " + user.getRole());
-        userRepository.save(user);
+        User auxUser = userRepository.save(user);
         logger.info("POST /users -> service saveUser(User user)");
+
+        if(auxUser != null){
+            return true;
+        } else{
+            return false;
+        }
     }
     //endregion
 
