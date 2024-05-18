@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -31,4 +32,8 @@ public class User {
 
     @Column
     private int role;
+
+    @OneToMany
+    @JoinColumn(name = "loan_id")
+    private List<Loan> loan;
 }
