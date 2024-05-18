@@ -1,1 +1,5 @@
 com\svalero\readify\ReadifyApplication.class
+com\svalero\readify\controller\BookController.class
+com\svalero\readify\service\BookService.class
+com\svalero\readify\domain\Book.class
+com\svalero\readify\repository\BookRepository.class
