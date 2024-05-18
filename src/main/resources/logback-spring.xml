@@ -2,7 +2,7 @@
 <configuration>
     <!-- Propiedades que se usara para indicar dónde almacenar los logs y como se llama el fichero -->
     <property name="LOG_DIR" value="logs" />
-    <property name="LOG_NAME" value="supermercadoAPI" />
+    <property name="LOG_NAME" value="ReadfyLogs" />
 
     <!-- Configuracion del log que aparece por consola: Console appender -->
     <appender name="Console"
