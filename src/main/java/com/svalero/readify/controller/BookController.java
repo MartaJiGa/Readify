@@ -1,15 +1,20 @@
 package com.svalero.readify.controller;
 
 import com.svalero.readify.domain.Book;
+import com.svalero.readify.domain.ErrorResponse;
+import com.svalero.readify.exception.BookNotFoundException;
 import com.svalero.readify.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 public class BookController {
@@ -38,9 +43,9 @@ public class BookController {
         return bookService.getBooks();
     }
     @GetMapping("/book/{bookId}")
-    public Optional<Book> getBook(@PathVariable long bookId) {
+    public Book getBook(@PathVariable long bookId) throws BookNotFoundException {
         logger.info("ini GET /book/" + bookId);
-        Optional<Book> book = bookService.getBookById(bookId);
+        Book book = bookService.getBookById(bookId);
         logger.info("end GET /book/" + bookId + " ");
         return book;
     }
@@ -70,6 +75,27 @@ public class BookController {
         logger.info("ini DELETE /book/" + bookId);
         bookService.removeBook(bookId);
         logger.info("end DELETE /book/" + bookId);
+    }
+    //endregion
+
+    //region EXCEPTION HANDLER
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> badRequestException(MethodArgumentNotValidException nve){
+        ErrorResponse errorResponse = new ErrorResponse(400, nve.getMessage());
+        logger.error(nve.getMessage(), nve);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(BookNotFoundException.class)
+    public ResponseEntity<ErrorResponse> bookNotFoundException(BookNotFoundException bnfe){
+        ErrorResponse errorResponse = new ErrorResponse(404, bnfe.getMessage());
+        logger.error(bnfe.getMessage(), bnfe);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(HttpServerErrorException.class)
+    public ResponseEntity<ErrorResponse> internalServerError(HttpServerErrorException.InternalServerError ise){
+        ErrorResponse errorResponse = new ErrorResponse(500, ise.getMessage());
+        logger.error(ise.getMessage(), ise);
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
     //endregion
 }

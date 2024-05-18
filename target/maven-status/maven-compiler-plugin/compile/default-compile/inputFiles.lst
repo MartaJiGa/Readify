@@ -1,10 +1,13 @@
 D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\controller\UserController.java
+D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\exception\BookNotFoundException.java
+D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\service\UserService.java
+D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\controller\BookController.java
 D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\repository\UserRepository.java
 D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\domain\User.java
+D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\exception\UserNotFoundException.java
 D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\domain\Loan.java
-D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\service\UserService.java
 D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\domain\Book.java
 D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\service\BookService.java
+D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\domain\ErrorResponse.java
 D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\repository\BookRepository.java
-D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\controller\BookController.java
 D:\0. Prácticas Presenciales Seg. Evaluación\Readify\src\main\java\com\svalero\readify\ReadifyApplication.java
