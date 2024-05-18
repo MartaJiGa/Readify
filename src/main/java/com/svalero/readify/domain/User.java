@@ -24,7 +24,7 @@ public class User {
     @Column
     private String email;
 
-    @Column
+    @Column(name = "membership_date")
     private LocalDate membershipDate;
 
     @Column

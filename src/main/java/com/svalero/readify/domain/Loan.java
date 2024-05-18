@@ -17,10 +17,10 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
+    @Column(name = "loan_date")
     private LocalDate loanDate;
 
-    @Column
+    @Column(name = "return_date")
     private LocalDate returnDate;
 
     @Column

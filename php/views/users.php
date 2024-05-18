@@ -22,7 +22,7 @@ $result = $conn->query($sql);
         <?php
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                echo "<tr><td>" . $row["id"]. "</td><td>" . $row["name"]. "</td><td>" . $row["email"]. "</td><td>" . $row["membershipDate"]. "</td><td>" . ($row["active"] ? 'Sí' : 'No'). "</td></tr>";
+                echo "<tr><td>" . $row["id"]. "</td><td>" . $row["name"]. "</td><td>" . $row["email"]. "</td><td>" . $row["membership_date"]. "</td><td>" . ($row["active"] ? 'Sí' : 'No'). "</td></tr>";
             }
         } else {
             echo "<tr><td colspan='5'>There aren´t no registered users</td></tr>";

@@ -24,7 +24,7 @@ public class Book {
     @Column
     private String author;
 
-    @Column
+    @Column(name = "published_date")
     private LocalDate publishedDate;
 
     @Column
@@ -33,6 +33,6 @@ public class Book {
     @Column
     private Boolean available;
 
-    @Column
+    @Column(name = "page_count")
     private float pageCount;
 }
