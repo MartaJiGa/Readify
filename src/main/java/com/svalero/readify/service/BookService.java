@@ -21,6 +21,15 @@ public class BookService {
     public Optional<Book> getBookById(Long id) {
         return bookRepository.findById(id);
     }
+    public List<Book> findByTitle(String title){
+        return bookRepository.findByTitle(title);
+    }
+    public List<Book> findByAuthor(String author){
+        return bookRepository.findByAuthor(author);
+    }
+    public List<Book> findByTitleAndAuthor(String title, String author){
+        return bookRepository.findByTitleAndAuthor(title,author);
+    }
     //endregion
 
     //region POST

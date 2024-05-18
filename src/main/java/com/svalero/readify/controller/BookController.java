@@ -16,7 +16,16 @@ public class BookController {
 
     //region GET
     @GetMapping("/books")
-    public List<Book> findAll(){
+    public List<Book> findAll(@RequestParam(defaultValue = "")String title, @RequestParam(defaultValue = "")String author){
+        if(!title.isEmpty() && author.isEmpty()){
+            return bookService.findByTitle(title);
+        }
+        else if(title.isEmpty() && !author.isEmpty()){
+            return bookService.findByAuthor(author);
+        }
+        else if(!title.isEmpty() && !author.isEmpty()){
+            return bookService.findByTitleAndAuthor(title, author);
+        }
         return bookService.getBooks();
     }
     @GetMapping("/book/{bookId}")

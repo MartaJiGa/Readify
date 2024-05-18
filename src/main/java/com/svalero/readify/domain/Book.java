@@ -32,6 +32,6 @@ public class Book {
     @Column
     private Boolean available;
 
-    @Column
+    @Column(name = "page_count")
     private float pageCount;
 }
