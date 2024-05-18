@@ -17,20 +17,20 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "loan_date")
+    @Column
     private LocalDate loanDate;
 
-    @Column(name = "return_date")
+    @Column
     private LocalDate returnDate;
 
     @Column
     private Boolean returned;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "bookId")
     private Book book;
 }

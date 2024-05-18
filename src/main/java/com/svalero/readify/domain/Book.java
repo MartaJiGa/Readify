@@ -24,7 +24,7 @@ public class Book {
     @Column
     private String author;
 
-    @Column(name = "published_date")
+    @Column
     private LocalDate publishedDate;
 
     @Column
@@ -33,10 +33,6 @@ public class Book {
     @Column
     private Boolean available;
 
-    @Column(name = "page_count")
+    @Column
     private float pageCount;
-
-    @OneToMany
-    @JoinColumn(name = "loan_id")
-    private List<Loan> loan;
 }

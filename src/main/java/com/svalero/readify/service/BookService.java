@@ -2,6 +2,8 @@ package com.svalero.readify.service;
 
 import com.svalero.readify.domain.Book;
 import com.svalero.readify.repository.BookRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ public class BookService {
 
     @Autowired
     private BookRepository bookRepository;
+
+    private Logger logger = LoggerFactory.getLogger(BookService.class);
 
     //region GET
     public List<Book> getBooks(){
