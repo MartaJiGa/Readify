@@ -1,6 +1,7 @@
 package com.svalero.readify.service;
 
 import com.svalero.readify.domain.Book;
+import com.svalero.readify.exception.BookNotFoundException;
 import com.svalero.readify.repository.BookRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +24,9 @@ public class BookService {
         logger.info("GET /books -> service getBooks()");
         return bookRepository.findAll();
     }
-    public Optional<Book> getBookById(Long id) {
+    public Book getBookById(Long id) throws BookNotFoundException {
         logger.info("GET /book/{bookId} -> service getBookById(Long id) -> Id: " + id);
-        return bookRepository.findById(id);
+        return bookRepository.findById(id).orElseThrow(()-> new BookNotFoundException(id));
     }
     public List<Book> findByTitle(String title){
         logger.info("GET /books -> service findByTitle(String title) -> Title: " + title);
@@ -57,7 +58,7 @@ public class BookService {
     //endregion
 
     //region PUT
-    public void modifyBook(Book newBook, long bookId){
+    public void modifyBook(Book newBook, long bookId) {
 
         logger.info("ini PUT /book/{bookId} -> service modifyBook(Book newBook, long bookId) -> findById(bookId) -> BookId: " + bookId);
         Optional<Book> book = bookRepository.findById(bookId);
@@ -89,7 +90,7 @@ public class BookService {
     //endregion
 
     //region DELETE
-    public void removeBook(long bookId){
+    public void removeBook(long bookId) {
         logger.info("ini DELETE /book/{bookId} -> service removeBook(long bookId)");
         bookRepository.deleteById(bookId);
         logger.info("end DELETE /book/{bookId} -> service removeBook(long bookId)");
