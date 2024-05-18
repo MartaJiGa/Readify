@@ -45,10 +45,16 @@ public class UserController {
 
     //region POST
     @PostMapping("/users")
-    public void saveUser(@RequestBody User user) {
+    public ResponseEntity<Void> saveUser(@RequestBody User user) {
         logger.info("ini POST /users");
-        userService.saveUser(user);
+        Boolean isCreated = userService.saveUser(user);
         logger.info("end POST /users");
+
+        if(isCreated){
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } else{
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
     //endregion
 

@@ -43,7 +43,7 @@ public class BookService {
     //endregion
 
     //region POST
-    public void saveBook(Book book){
+    public boolean saveBook(Book book){
         logger.info("ini POST /books -> service saveBook(Book book)" +
                 "\n\tId:" + book.getId() +
                 "\n\tTitle:" + book.getTitle() +
@@ -52,8 +52,15 @@ public class BookService {
                 "\n\tISBN:" + book.getISBN() +
                 "\n\tAvailable:" + book.getAvailable() +
                 "\n\tPages:" + book.getPageCount());
-        bookRepository.save(book);
+
+        Book auxBook = bookRepository.save(book);
         logger.info("end POST /books -> service saveBook(Book book)");
+        
+        if(auxBook != null){
+            return true;
+        } else{
+            return false;
+        }
     }
     //endregion
 
