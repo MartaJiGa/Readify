@@ -1,0 +1,42 @@
+package com.svalero.readify.domain;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
+@Entity(name = "book")
+public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column
+    private String title;
+
+    @Column
+    private String author;
+
+    @Column(name = "published_date")
+    private LocalDate publishedDate;
+
+    @Column
+    private String ISBN;
+
+    @Column
+    private Boolean available;
+
+    @Column(name = "page_count")
+    private float pageCount;
+
+    @OneToMany
+    @JoinColumn(name = "loan_id")
+    private List<Loan> loan;
+}
