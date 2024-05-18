@@ -11,27 +11,18 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Entity(name = "book")
-public class Book {
+@Entity(name = "loan")
+public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
-    private String title;
+    @Column(name = "loan_date")
+    private LocalDate loanDate;
+
+    @Column(name = "return_date")
+    private LocalDate returnDate;
 
     @Column
-    private String author;
-
-    @Column(name = "published_date")
-    private LocalDate publishedDate;
-
-    @Column
-    private String ISBN;
-
-    @Column
-    private Boolean available;
-
-    @Column(name = "page_count")
-    private float pageCount;
+    private Boolean returned;
 }

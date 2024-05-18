@@ -6,4 +6,5 @@ com\svalero\readify\repository\BookRepository.class
 com\svalero\readify\repository\UserRepository.class
 com\svalero\readify\ReadifyApplication.class
 com\svalero\readify\controller\UserController.class
+com\svalero\readify\domain\Loan.class
 com\svalero\readify\domain\User.class
