@@ -41,7 +41,7 @@ public class BookController {
     public Optional<Book> getBook(@PathVariable long bookId) {
         logger.info("ini GET /book/" + bookId);
         Optional<Book> book = bookService.getBookById(bookId);
-        logger.info("end GET /book/" + bookId + " " + HttpStatus.values());
+        logger.info("end GET /book/" + bookId + " ");
         return book;
     }
     //endregion
